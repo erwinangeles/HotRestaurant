@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tables Page</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center"><span class=""></span> Hot Restaurant</h1>
+      <hr>
+      <h2 class="text-center">Book you table today!</h2>
+      <br>
+
+      <div class="text-center">
+        <a href="/api/tables"><button type="button" class="btn btn-lg btn-primary">View Tables</button></a>
+        <a href="reserve"><button type="button" class="btn btn-lg btn-danger">Make Reservation</button></a>
+      </div>
+
+    </div>
+    <div class = 'container'>
+        <div class = 'row'>
+            <form id = 'form'>
+                <label>Name</label>
+                <input type = 'text' class = 'form-control' id = 'name'> 
+                <label>Phone Number</label>
+                <input type = 'text' class = 'form-control' id = 'phonenumber'> 
+                <label>Email</label>
+                <input type = 'text' class = 'form-control' id = 'email'> 
+                <label>Id</label>
+                <input type = 'text' class = 'form-control' id = 'id'> 
+                <button class = 'btn btn-primary' id = 'submit-button'>submit</button>
+            </form>
+        </div>
+        <script>
+        $(document).on("click", "#submit-button", function(){
+            let name = $("#name").val().trim();
+            let phonenumber = $("#phonenumber").val().trim();
+            let email = $("#email").val().trim();
+            let id = $("#id").val().trim();
+
+            let reservation = {
+                name,
+                phonenumber,
+                email,
+                id
+            };
+          
+            $.ajax({
+            url: "http://localhost:3000/api/tables/",
+            data: reservation,
+            type: 'POST',
+            success: function(res) {
+                console.log(res);
+            }
+        });
+        })
+        </script>
+        
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
+      </div>
+    </footer>
+
+  </div>
+
+
+</body>
+</html>

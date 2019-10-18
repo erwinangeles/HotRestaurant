@@ -16,11 +16,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'views/index.html'));
+  res.sendFile(path.join(__dirname, 'home.html'));
+});
+app.get('/reserve', function(req, res) {
+  res.sendFile(path.join(__dirname, 'reservation.html'));
 });
 
+
 app
-  .route('/api/reservations')
+  .route('/api/tables')
   .get(function(req, res) {
     res.json(reservations);
   })
@@ -28,6 +32,17 @@ app
     const newReservations = req.body;
     reservations.push(newReservations);
     res.json({ status: true, message: 'Reservation Added' });
+  });
+
+  app
+  .route('/api/waitlist')
+  .get(function(req, res) {
+    res.json(waitlist);
+  })
+  .post(function(req, res) {
+    const newWait = req.body;
+    waitlist.push(newWait);
+    res.json({ status: true, message: 'Waitlist Reservation Added' });
   });
 
 app.listen(3000, function() {
