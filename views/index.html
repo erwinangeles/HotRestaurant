@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    </head>
+
+<script>
+$.ajax({
+    url: "http://localhost:3000/api/reservations/",
+    type: 'GET',
+    success: function(res) {
+        console.log(res);
+    }
+});
+</script>
+
+<div>
+    <div id="result">
+
+    </div>
+
+    <form>
+        Phone Number
+        <input type="text" name="name" id="name">
+        <input type="text" name="phonenumber" id="phonenumber">
+        <input type="text" name="email" id="email">
+        <input type="text" name="id" id="id"
+        <input type="button" class="button-submit">Submit</input>
+    </form>
+
+    <script>
+        $(document).on("click", ".button-submit", function(){
+            let reservation = {
+                name,
+                phonenumber,
+                email,
+                id
+            };
+            let json = JSON.stringify(reservation); 
+            $.ajax({
+            url: "http://localhost:3000/api/reservations/",
+            data: json,
+            contentType: "text/json",
+            type: 'POST',
+            success: function(res) {
+                console.log(res);
+            }
+        });
+        })
+
+    </script>
+</div>
+
+<!-- $.ajax({
+    url: "http://localhost:3000/api/reservations/",
+    type: 'GET',
+    success: function(res) {
+        console.log(res);
+        $("#result").append(res[0].name);
+    }
+}); -->
+</html>
